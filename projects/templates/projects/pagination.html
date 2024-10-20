@@ -1,0 +1,20 @@
+{% if queryset.has_other_pages %}  <!-- agar sahifa 1 ta bulsa paginatorni kursatma -->
+    <div class="pagination">
+      <ul class="container">
+        {% if queryset.has_previous %} <!-- agar 1 chi raqamga kelmagan bulsa orqaga ishlab boshlaydi 2 ddan 1 ga qaytganda kurinmay qoladi -->
+          <li><a href="?page={{ queryset.previous_page_number }}" class="btn page-link" data-page="{{ queryset.previous_page_number }}">&#10094; Prev</a></li>  <!-- queryset.previous_page_number  orqaga tugmasi-->
+        {% endif %}
+        {% for page in custom_range %}  <!-- paginator.page_range-->
+          {% if page == queryset.number %}
+            <li><a href="?page={{ page }}" class="btn btn--sub page-link" data-page="{{ page }}">{{ page }}</a></li>
+          {% else %}
+            <li><a href="?page={{ page }}" class="btn page-link" data-page="{{ page }}">{{ page }}</a></li>
+          {% endif %}
+       {% endfor %}
+        {% if queryset.has_next %} <!-- agar son oxirgi bulmasa keyingiga utadigan tugma ishlab boshlaydi oxiriga borsa kurinmay qoladi-->
+        <li><a href="?page={{ queryset.next_page_number }}" class="btn page-link" data-page="{{ queryset.next_page_number }}">Next &#10095;</a></li>  <!--queryset.next_page_number  keyingiga tugmasi-->
+        {% endif %}
+      </ul>
+    </div>
+{% endif %}
+
